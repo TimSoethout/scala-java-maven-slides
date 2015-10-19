@@ -15,7 +15,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+		<link rel="stylesheet" href="css/theme/solarized.css" id="theme">
 
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -56,7 +56,7 @@ Note:
 - Intro
 - Scala @ ING - Context
 - Compiling Scala in Maven
-- Mixing Java and Scala sources
+- Mixing Java and Scala source
 - Code coverage
 - Code quality using Sonar
 - Secure code analysis
@@ -65,8 +65,13 @@ Note:
 
 </section>
 
-<section data-markdown>
+<section>
+	<section data-markdown>
 # Scala @ ING
+  </section>
+
+	<section data-markdown>
+## State
 
 - Much Java with Maven
 - Some Scala for restful services using Akka
@@ -74,7 +79,99 @@ Note:
 
 Note:
 - Coral is a realtime analytics framework build on Akka and Spark presented by Natalino Busa at an earlier meetup
+  </section>
 
+	<section data-markdown>
+## Context
+
+- Maven project written in Java 6
+- Team with mixed Scala experience levels
+  - Eager to do Scala
+  - But within Enterprise: Compliancy
+
+Note:
+- Enterprise and thus code quality, maintainability and other compliancy
+- This was already in place for Java, but for Scala not yet
+
+  </section>
+
+</section>
+
+<section>
+	<section data-markdown>
+# Compiling Scala in Maven
+  </section>
+
+	<section data-markdown>
+## Demo project
+	</section>
+
+	<section data-markdown>
+## scala-maven-plugin
+
+```xml
+&lt;project&gt;
+  ...
+  &lt;build&gt;
+    &lt;sourceDirectory&gt;src/main/scala&lt;/sourceDirectory&gt;
+    &lt;testSourceDirectory&gt;src/test/scala&lt;/testSourceDirectory&gt;
+    ...
+    &lt;plugins&gt;
+      ...
+      &lt;plugin&gt;
+        &lt;groupId&gt;net.alchim31.maven&lt;/groupId&gt;
+        &lt;artifactId&gt;scala-maven-plugin&lt;/artifactId&gt;
+        &lt;version&gt;3.2.1&lt;/version&gt;
+        ...
+      &lt;/plugin&gt;
+      ...
+    &lt;/plugins&gt;
+    ...
+  &lt;/build&gt;
+  ...
+&lt;/project&gt;
+```
+
+Note:
+- Most common way
+- Works for most usecases, but you run into trouble when mixing sources
+	</section>
+</section>
+
+<section>
+	<section data-markdown>
+# Mixing Java and Scala source
+  </section>
+</section>
+
+<section>
+	<section data-markdown>
+# Code coverage
+  </section>
+</section>
+
+<section>
+	<section data-markdown>
+# Code quality using Sonar
+  </section>
+</section>
+
+<section>
+	<section data-markdown>
+# Secure code analysis
+  </section>
+</section>
+
+<section>
+	<section data-markdown>
+# Combining Documentation
+  </section>
+</section>
+
+<section>
+	<section data-markdown>
+# Wrap up
+  </section>
 </section>
 
 				<section data-markdown>
@@ -104,7 +201,7 @@ Note:
 				history: true,
 				center: true,
 
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				transition: 'convex', // none/fade/slide/convex/concave/zoom
 
 				// Optional reveal.js plugins
 				dependencies: [
