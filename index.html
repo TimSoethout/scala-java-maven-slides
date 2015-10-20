@@ -113,7 +113,7 @@ Note:
       &lt;plugin&gt;
         &lt;groupId&gt;net.alchim31.maven&lt;/groupId&gt;
         &lt;artifactId&gt;scala-maven-plugin&lt;/artifactId&gt;
-        &lt;version&gt;3.2.1&lt;/version&gt;
+        &lt;version&gt;3.2.2&lt;/version&gt;
         ...
       &lt;/plugin&gt;
     &lt;/plugins&gt;
@@ -133,15 +133,61 @@ Note:
   </section>
 
 	<section data-markdown>
-## Demo project
+## Demo
+### Mixed Java &amp; Scala
 
 Note:
 - Show
-+ Source files for Java &amp; Scala
-+ Testcases
-+ IntelliJ test
-+ `mvn test`
-+ Change implementation to depend on eachother
+	+ Source files for Java &amp; Scala
+	+ Testcases - `@RunWith(classOf[JUnitRunner])`
+	+ IntelliJ test
+	+ `mvn test`
+	</section>
+
+  <section data-markdown>
+## Demo
+### Multiple modules
+
+Note:
+- Show
+	+ Change branch to `multimodule`
+	+ Parent pom
+	+ individual poms
+- Do `HelloWorld2.java`
+	+ add dependency from `module2` on `module1`
+	+ add `new module1.HelloWorld().hello()`
+	+ add `new module1.HelloScala().test()`
+	+ All works flawlessly because of module1 being compiled to `/target/` correctly
+- Same for Scala to Java `HelloScala2.scala`
+  + def test = new module1.HelloWorld().hello()
+  + def someOther = new module1.HelloScala().test
+- Now try inside module1: `HelloWorld.java`
+  + `public String hello() { return new HelloScala().test();}
+	+ Fails because `maven-compiler-plugin` can't find Scala sources
+	+ Disabling `maven-compiler-plugin` solves the first part
+	+ Also need incremental compilation turned on to find
+	</section>
+
+<section data-markdown>
+## Mixing it up
+
+- Seems to work on first sight
+- Problems can arise in:
+  + Multiple modules
+	+ Dependencies from Java to Scala
+    - Depends on compile order
+    - sbt incremental compiler to the rescue
+
+scala-maven-plugin:
+```xml
+&lt;configuration&gt;
+  &lt;recompileMode&gt;incremental&lt;/recompileMode&gt;
+&lt;/configuration&gt;
+```
+
+Note:
+- Know how to solve these problems to counter naysayers
+- TODO: Maybe weird to mention this here? Example about java/scala incompatibility should go to single module part?
 	</section>
 </section>
 
@@ -172,6 +218,22 @@ Note:
 <section>
 	<section data-markdown>
 # Wrap up
+  </section>
+
+  <section data-markdown>
+## Recap
+
+- Awesome
+  </section>
+
+  <section data-markdown>
+## Thanks for listening
+
+Questions?
+
+[Slides](http://blog.timmybankers.nl/scala-java-maven-slides)
+/
+[Code](https://github.com/TimSoethout/scala-java-maven-code)
   </section>
 </section>
 
