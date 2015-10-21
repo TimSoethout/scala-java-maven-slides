@@ -1,6 +1,6 @@
 # reveal.js [![Build Status](https://travis-ci.org/hakimel/reveal.js.svg?branch=master)](https://travis-ci.org/hakimel/reveal.js)
 
-[![Join the chat at https://gitter.im/TimSoethout/scala-java-maven-slides](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/TimSoethout/scala-java-maven-slides?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+Questions? Please contact me on Gitter: [![Join the chat at https://gitter.im/TimSoethout/scala-java-maven-slides](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/TimSoethout/scala-java-maven-slides?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 A framework for easily creating beautiful presentations using HTML. [Check out the live demo](http://lab.hakim.se/reveal-js/).
 
