@@ -227,6 +227,59 @@ Note:
 	<section data-markdown>
 # Code coverage
   </section>
+
+  <section data-markdown>
+## Cobertura, Jacoco, Clover, EclEmma?!?
+
+- Works good for Java
+- Line and branch coverage
+
+Note:
+- Jacoco agent for on-the-fly bytecode instrumentation
+- Cobertura instruments byte code offline
+  </section>
+
+  <section data-markdown>
+## Demo
+### Let's try it for Scala!
+
+Note:
+- (branch `code-coverage`)
+- `mvn clean cobertura:cobertura`
+- Make everything big for viewers
+- Try Jacoco
+- `open module1/target/site/jacoco/index.html` - see bad coverage for Scala...
+
+  </section>
+
+  <section data-markdown>
+## That's awful!
+
+Note:
+- For us this meant code coverage statistic become nearly usesless, since you can't see the difference between low coverage or tool screwups
+  </section>
+
+  <section data-markdown>
+## [scoverage-maven-plugin](https://github.com/scoverage/scoverage-maven-plugin) to the rescue!
+
+- Scala statement and branch coverage!
+
+Note:
+- Statement coverage means granularity on coverage is not limited by full lines!
+- Much better fit for Scala
+
+  </section>
+
+  <section data-markdown>
+## Demo
+### Let's try it for Scala!
+
+Note:
+- branch `code-coverage-scoverage`
+- `mvn scoverage:report`
+- TODO: fix missing hightlighting
+
+  </section>
 </section>
 
 <section>
