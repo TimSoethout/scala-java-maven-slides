@@ -65,6 +65,22 @@ Note:
 
 </section>
 
+</section>
+
+<section data-markdown>
+# Who am I?
+
+### Tim Soethout
+- Functional programmer at hearth
+- Scala evangelist/trainer inside ING
+
+Note:
+- If you know Scala/Haskell-like features, it's horrible to need to use Java again, amirite?
+- TODO insert nice pic
+- Pic of hobbies? - aquarium etc
+
+</section>
+
 <section>
 	<section data-markdown >
 # Scala @ ING
@@ -235,8 +251,8 @@ Note:
 - Line and branch coverage
 
 Note:
-- Jacoco agent for on-the-fly bytecode instrumentation
 - Cobertura instruments byte code offline
+- Jacoco agent for on-the-fly bytecode instrumentation
   </section>
 
   <section data-markdown>
@@ -255,8 +271,15 @@ Note:
   <section data-markdown>
 ## That's awful!
 
+- Scala compiler generates lots for you (i.e. in case classes, traits etc)
+  + Cobertura and Jacoco work on byte code
+  + ergo lots of uncovered generated code
+	+ I don't want to be testing generated code, would you?
+
 Note:
-- For us this meant code coverage statistic become nearly usesless, since you can't see the difference between low coverage or tool screwups
+- For us this meant code coverage statistic become nearly useless, since you can't see the difference between low coverage or tool screwups
+- This is partly solvable by using [`jacoco-scala-maven-plugin`](http://timezra.blogspot.nl/2013/10/jacoco-and-scala.html), which filters the results
+- Since Jacoco instruments on the fly, it sometimes has weird behaviour in Java coverage as well. We wanted 95%+ coverage, so every false negatives made our lives much harder.
   </section>
 
   <section data-markdown>
@@ -267,6 +290,7 @@ Note:
 Note:
 - Statement coverage means granularity on coverage is not limited by full lines!
 - Much better fit for Scala
+- But case class not covered... Well that is ok, since it is all generated code, which should just work(tm)
 
   </section>
 
@@ -277,8 +301,21 @@ Note:
 Note:
 - branch `code-coverage-scoverage`
 - `mvn scoverage:report`
+- Optional: `new HelloScala().notCovered();` in Java test file - cover scala code from Java test case
+- Hmmm... no Java Coverage...
 
   </section>
+
+	<section data-markdown>
+## So what did we do?!
+
+- Statement coverage for Scala with scoverage
+- Normal line/branch coverage for Java with Cobertura
+
+Note:
+- Next chapter on correct overall coverage numbers
+
+	</section>
 </section>
 
 <section>
