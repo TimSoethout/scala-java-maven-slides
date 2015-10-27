@@ -1,0 +1,14 @@
+/* dot sonar-build.dot -Tsvg -O */
+digraph SonarBuild {
+  "*.java" -> cobertura;
+  "*.scala" -> {cobertura, scoverage};
+
+  { rank=same; cobertura; scoverage; }
+  { rank=same; "cobertura.xml"; "scoverage.xml"; }
+
+  cobertura -> "cobertura.xml" -> "xml-transform-maven-plugin"
+    -> "cobertura-without-scala.xml" -> "Sonar Cobertura Plugin" -> SonarQube;
+  scoverage -> "scoverage.xml" -> "Sonar Scoverage plugin" -> SonarQube;
+
+
+}

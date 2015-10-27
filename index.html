@@ -59,7 +59,7 @@ Note:
 - Mixing Java and Scala source
 - Code coverage
 - Code quality using Sonar
-- Secure code analysis
+- More code analysis
 - Combining Documentation
 - Wrap up
 
@@ -78,6 +78,7 @@ Note:
 - If you know Scala/Haskell-like features, it's horrible to need to use Java again, amirite?
 - TODO insert nice pic
 - Pic of hobbies? - aquarium etc
+- Enable people to do Scala within ING
 
 </section>
 
@@ -110,6 +111,7 @@ Note:
 Note:
 - Enterprise and thus code quality, maintainability and other compliancy
 - This was already in place for Java, but for Scala not yet
+-
   </section>
 
 </section>
@@ -290,7 +292,6 @@ Note:
 Note:
 - Statement coverage means granularity on coverage is not limited by full lines!
 - Much better fit for Scala
-- But case class not covered... Well that is ok, since it is all generated code, which should just work(tm)
 
   </section>
 
@@ -301,6 +302,7 @@ Note:
 Note:
 - branch `code-coverage-scoverage`
 - `mvn scoverage:report`
+- But case class not covered... Well that is ok, since it is all generated code, which should just work(tm)
 - Optional: `new HelloScala().notCovered();` in Java test file - cover scala code from Java test case
 - Hmmm... no Java Coverage...
 
@@ -323,11 +325,72 @@ Note:
 	<section data-markdown>
 # Code quality using Sonar
   </section>
+
+	<section data-markdown>
+## [SonarQube](http://www.sonarqube.org)
+- Code Quality Platform
+- Code metrics
+  + Coverage
+  + Complexity
+  + Size
+  + Rules
+- Spot regression
+
+Note:
+- Basic website with database with code statistics
+- Update on build - locally and build server
+	</section>
+
+	<section data-markdown>
+## Tooling
+- [scala-sonarqube-docker](https://github.com/TimSoethout/scala-sonarqube-docker)
+  + `docker-compose` script with data container, Postgres database and SonarQube
+  + Contains plugins needed for Scala!
+- [`xml-transform-maven-plugin`](https://github.com/TimSoethout/transform-xml-maven-plugin)
+  + Used for filtering Scala coverage from `cobertura.xml`
+
+Note:
+- docker-compose is a way to easily define groups of docker containers that should work together
+- Show plugins installed in Sonar: http://172.16.164.130:9000/updatecenter
+  + scalastyle checks code style/quality
+  + checkstyle for java+
+  + ...
+  + Scala plugin - patched version enabling Java/Scala mixing
+- There are xslt-transformation plugins available, but they require xslt file in resources on every project
+- Explain use for transformation plugin next slide
+	</section>
+
+	<section>
+<h2>Demo</h2>
+<h3>Java &amp; Scala code coverage in Sonar</h3>
+
+
+<img src="lib/image/sonar-build.dot.svg" class="stretch">
+
+<aside class="notes">
+		Explain:
+		<ul>
+			<li> Java and scala source is measured during testing. (By 2 maven plugins)
+			<li> Cobertura collects coverage on both Java/Scala, because instruments bytecode
+			<li> Sonar can't handle multiple results from 2 sources, which would be the case for scala sources
+			<li> cobertura.xml has easy way to filter files by removing nodes with *.java in an attribute
+			<li> I wrote xml-transform-maven-plugin to do easy xpath deletions on files as part of the build
+		</ul>
+		Show:
+		<ul>
+			<li> Sonar settings
+			<li> cobertura-maven-plugin
+			<li> xml-transform-maven-plugin config (verify)
+			<li> `mvn clean cobertura:cobertura scoverage:report verify sonar:sonar`
+			<li> sonar output (via coverage) - also scalastylestyle
+		</ul>
+</aside>
+	</section>
 </section>
 
 <section>
 	<section data-markdown>
-# Secure code analysis
+# More code analysis
   </section>
 </section>
 
