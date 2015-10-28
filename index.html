@@ -20,6 +20,13 @@
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
 
+<!-- some hacking to make it readable  -->
+		<style>
+			#who-am-i-, #tim-soethout {
+				color: white; text-shadow: black 0.1em 0.1em 0.2em;
+			}
+		</style>
+
 		<!-- Printing and PDF exports -->
 		<script>
 			var link = document.createElement( 'link' );
@@ -60,26 +67,34 @@ Note:
 - Code coverage
 - Code quality using Sonar
 - More code analysis
-- Combining Documentation
+- Documentation for Java consumers
 - Wrap up
 
-</section>
+Note:
+- walk through items
+- Expect lots of Demo's and working code!
 
 </section>
 
-<section data-markdown>
+</section>
+
+<section data-markdown  data-background="lib/image/aquarium.jpg" style="color: white; text-shadow: black 0.1em 0.1em 0.2em;">
+	    <script type="text/template">
 # Who am I?
 
 ### Tim Soethout
 - Functional programmer at heart
 - Scala evangelist/trainer inside ING
+- More recently: Aquarium enthusiast &amp; West Coast Swing-dancer
+
 
 Note:
+- Come from Functional programming with Haskell. Now Scala!
 - If you know Scala/Haskell-like features, it's horrible to need to use Java again, amirite?
-- TODO insert nice pic
-- Pic of hobbies? - aquarium etc
 - Enable people to do Scala within ING
-
+- Aquarium, see the picture
+- WCS, new lessons are starting soon ;)
+    </script>
 </section>
 
 <section>
@@ -111,7 +126,9 @@ Note:
 Note:
 - Enterprise and thus code quality, maintainability and other compliancy
 - This was already in place for Java, but for Scala not yet
--
+- To do this right, we needed some tools
+- Tooling in place for Java, Scala tooling needs to get on par
+- Let's see what we did
   </section>
 
 </section>
@@ -345,7 +362,8 @@ Note:
 ## Tooling
 - [scala-sonarqube-docker](https://github.com/TimSoethout/scala-sonarqube-docker)
   + `docker-compose` script with data container, Postgres database and SonarQube
-  + Contains plugins needed for Scala!
+  + Contains plugins needed for Scala! (Cobertura, scoverage, Java, etc)
+- [sonar-scala-plugin](https://github.com/TimSoethout/sonar-scala/releases) - updated to use cobertura only for Java
 - [`xml-transform-maven-plugin`](https://github.com/TimSoethout/transform-xml-maven-plugin)
   + Used for filtering Scala coverage from `cobertura.xml`
 
@@ -415,25 +433,69 @@ Note:
 - `-Ywarn-value-discard`
 - `-Xfuture`
 - `-Ywarn-unused-import`
+- `-Ywarn-unused`
 
 Note:
-- TODO lookup comments on these
+- gives warnings
+- `-unchecked` - checks unchecked casts and erasure!
+- `-deprecation` - warn deprecated APIs
+- `-feature` - explicitly enable advanced features: dynamics, higher kinds, existential types etc
+- `-Xlint` - Enable recommended additional warnings
+- `-Yno-adapted-args` - repl: `List(1,2,3).toSet()` - returns false, wtf?! - `scala -Yno-adapted-args`
+- `-Ywarn-dead-code` - warns about dead code
+- `-Ywarn-numeric-widen` - Warn when numerics are widened. Can happen when implicits are involved
+- `-Ywarn-value-discard` - Warn when non-Unit expression results are unused
+- `-Xfuture` - make feature behave like next major version, this catches breaking changes early
+- `-Ywarn-unused-import` - warns on unused imports
+- `-Ywarn-unused` - Warn when local and private vals, vars, defs, and types are are unused
+- And much more, check man page for scalac.
 	</section>
 
 	<section data-markdown>
 ## Demo
+### Compiler flags
 ### FindBugs &amp; FindSecurityBugs
+
+Note:
+- Show unused import.. add to Scala source file and compile
+	</section>
+
+	<section data-markdown>
+## More checks - To implement
+
+- [Abide](https://github.com/scala/scala-abide)
+- [Wartremover](https://github.com/puffnfresh/wartremover)
+
+Note:
+- As you see I love to be able to depend on tooling to catch my mistakes.
+- Wartremover &amp; Abide (Julian Dragos, maintainer will give talk after me): lint tool, which can be used to define rules for your code
+- All of them can be added as Scala compiler plugins
 	</section>
 </section>
 
 <section>
 	<section data-markdown>
-# Combining Documentation
+# Documentation for Java consumers
   </section>
 
 	<section data-markdown>
 ## [genjavadoc](https://github.com/typesafehub/genjavadoc)
+
+- Generated outline of Scala files in java
+- including javadoc annotations
+- useful to generate Javadoc for Java consumers
   </section>
+
+	<section data-markdown>
+## Demo
+### genjavadoc
+
+Note:
+- `open module1/target/apidocs/index.html`
+	</section>
+
+
+
 </section>
 
 <section>
@@ -450,11 +512,14 @@ Note:
   + code coverage on both
 - Code Quality with
   + SonarQube
-	+ ScalaStyle
+  + ScalaStyle
   + FindBugs
+- Lots to tweak - compiler arguments, linters
 - Documentation for Java
+
 Note:
--
+- I gave you an overview of how we use it, and hopefully this is also useful for you.
+- It's all on github, so feel free to use it!
   </section>
 
   <section data-markdown>
@@ -484,6 +549,7 @@ Questions?
 				progress: true,
 				history: true,
 				center: true,
+				// showNotes: true,
 
 				transition: 'convex', // none/fade/slide/convex/concave/zoom
 
