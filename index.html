@@ -109,7 +109,7 @@ Note:
   </section>
 
 	<section data-markdown>
-## State
+## State (2015)
 
 - Much Java with Maven
 - Some Scala for restful services using Akka
@@ -216,7 +216,7 @@ Note:
 
 - Seems to work on first sight
 - Problems can arise in:
-  + Multiple modules
+  + (Multiple modules - fixed with scala-maven-plugin)
   + Dependencies from Java to Scala
     - Depends on compile order
     - sbt incremental compiler to the rescue
@@ -459,10 +459,11 @@ Note:
 	<section data-markdown>
 ## Demo
 ### Compiler flags
-### FindBugs &amp; FindSecurityBugs
+
 
 Note:
 - Show unused import.. add to Scala source file and compile
+- TODO add ### FindBugs &amp; FindSecurityBugs
 	</section>
 
 	<section data-markdown>
@@ -518,7 +519,6 @@ Note:
 - Code Quality with
   + SonarQube
   + ScalaStyle
-  + FindBugs
 - Lots to tweak - compiler arguments, linters
 - Documentation for Java
 
